@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 
 const db = new Sequelize({
     dialect: 'sqlite',
-    storage: __dirname + '/NodeJs.db'
+    storage: __dirname + '/Task&NotesManager.db'
 })
 
 const TaskManager = db.define('TaskManager', {
@@ -34,16 +34,28 @@ const TaskManager = db.define('TaskManager', {
         type: Sequelize.STRING,
         allowNull: true,
     },
-    Notes: {
+    note: {
         type: Sequelize.STRING,
         allowNull: true,
-    }  
+    }
 })
 
-// to check if db created or not
+// const TaskNotes = db.define('TaskNotes', {
+//     id: {
+//         type: Sequelize.INTEGER,
+//         primaryKey: true,
+//         autoIncrement: true
+//     },
+//     notes: {
+//         type: Sequelize.STRING,
+//         allowNull:true
+//     }})
+
+//     TaskManager.hasMany(TaskNotes);
+// // to check if db created or not
 db.sync()
-        .then(() => console.log('Database has been synced.'))
-        .catch((err) => console.log('Error creating database.'))
+        .then(() => console.log('Database Syncing.'))
+        .catch((err) => console.log(err))
 
 module.exports = {
     db, TaskManager
