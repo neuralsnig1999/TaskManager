@@ -1,23 +1,28 @@
-// $(document).ready(function(){
-    $(function(){
-        const addTaskButton = $("input[type='button']")
-       
-        addTaskButton.click(function(){
 
-        let task = $("input[id='task']").val()
-        let taskDueDate = $("input[id='due']").val()    
-        let taskStatus = $("input[name='task-status']:checked").val()
-        let taskPriority = $("input[name='priority']:checked").val()
-        let taskDescription = $("input[id='desc']").val()
-        
+// let submit = document.getElementById('button')
 
-        $.post(
-            "/tasks",
-            {task: task, due: taskDueDate, status: taskStatus, priority:taskPriority, description: taskDescription},
-            function(data){
-                console.log( data );
-            }
-        )
-        })
-    })
-// })
+async function addTask() {
+  const title = document.getElementById('task').value
+  const description = document.getElementById('desc').value
+  const status = $("input[name='task-status']:checked").val()
+  const duedate = document.getElementById('due').value
+  const priority = $("input[name='priority']:checked").val()
+  const note = document.getElementById('notes').value
+
+  addNewTodoJson(title, description, duedate, status, priority, note)
+}
+
+
+async function addNewTodoJson(title, description, duedate, status, priority, note) {
+
+  const resp = await fetch('/tasks', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ title, description, duedate, status, priority, note })
+  })
+
+}
+
+

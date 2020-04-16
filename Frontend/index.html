@@ -3,34 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Frontend/Styles/style.css">
+    <link rel="stylesheet" href="./Styles/style.css" type="text/css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./Scripts/jquery-3.4.1.js"></script>
+    <script async defer src="./Scripts/expand.js"></script>
     <title>Task Manager</title>
 </head>
-<body>
-
-    <div clas="container">
-
+<body onload="todosLoader()">
+    
+    
     <div class="jumbotron">
-        <h1>Tasks Manager</h1><br/>
+        <h2>Task Manager</h2><br/>
         <a class="button" href="newTask.html">Add Task</a>
     </div>
 
 
-<ul id="myList" type="none">
-    <h2 style="color: green; margin: 20px;">Tasks to be done:</h2>
-    <li>Submit NodeJs Project</li>
-    <li class="checked">Send Email to get CodingBlock's Course</li>
-    <li>Start java Project</li>
-</ul>
+<legend>Task List:</legend>
+
+<label for="sortBy">&emsp; Sort By</label>
+
+    <select id="sortBy" onchange="todosLoader()">
+    <option value="due">Due Date</option>
+    <option value="priority">Priority</option>
+    <option value="status">Status</option>
+    
+    </select>
+
+<br/><ul id="myList">
+
+</ul><br />
+
+<div class="modal fade" id="signup">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header" style="color:grey;text-align:center;height:50px;">
+                <h4 class="modal-title">Edit Details</h4>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <span id="pmsg"></span>
+                <form>
+
+                    <div class="form-group">
+                        <label for="date">Modify DueDate:*</label>
+                        <input type=date id="update_duedate">
+                    </div>
+
+                    <div class=" form-group ">
+                        <label for="priority">Change Priority:*</label>
+                        <select id="update_priority">
+                        <option value="high">High</option>
+                        <option vlaue="medium" selected>Medium</option>
+                        <option value="low">Low</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Change Status:</label>
+                        <input type="checkbox"  id="update_incomplete" onclick="onlyOne(this)" selected>InComplete
+                        <input type="checkbox"  id="update_complete" onclick="onlyOne(this)" selected>Complete
+
+                    </div>
+                    <script>
+                        function onlyOne(checkbox) {
+                            var checkboxes = document.getElementsByName('check')
+                            checkboxes.forEach((item) => {
+                                if (item !== checkbox) item.checked = false
+                            })
+                        }
+                    </script>
+
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="Submit" class="btn btn-outline-info" id="editDetails">Update</button>
+                <button type="Submit" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+</div>
   
-<footer class="jumbotron">
+<footer style="text-align: center;">
     <p><span style="color: red;">Copyright</span> © 1999-2020 Snigdha_Goyal. All rights reserved.</p>
 </footer>
-</div>
 
-
+<!-- <script type="text/javascript" src="Scripts/script.js"></script> -->
 </body>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
 </html>
-
 
